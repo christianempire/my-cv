@@ -1,0 +1,151 @@
+<div class="container-fluid pb-4">
+  <div class="main-content-wrapper">
+    <div class="container-fluid">
+      <div class="resume-wrapper mx-auto rounded-2">
+        <div class="resume-header px-4 px-lg-5">
+          <div class="resume-profile-holder text-center">
+            <img class="resume-profile-pic rounded-circle" src="images/profile.png" alt="image" />
+            <h2 class="resume-name text-uppercase">Christian Changa</h2>
+            <div class="resume-role-title text-uppercase">Full Stack Developer</div>
+            <div class="resume-contact mt-4">
+              <ul class="resume-contact-list list-unstyled list-inline mb-0 justify-content-between">
+                <li class="list-inline-item me-md-3 me-lg-5">
+                  <i class="resume-contact-icon bi bi-telephone-inbound me-2"></i>
+                  +51 993 279 957
+                </li>
+                <li class="list-inline-item me-md-3 me-lg-5">
+                  <i class="resume-contact-icon bi bi-envelope me-2"></i>
+                  christian.changa.94&#64;gmail.com
+                </li>
+                <li class="list-inline-item me-lg-5">
+                  <i class="resume-contact-icon bi bi-linkedin me-2"></i>
+                  linkedin.com/in/christian-changa
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="resume-body p-4 p-lg-5">
+          <div class="row">
+            <div class="col-main col-12 col-lg-8 pe-lg-4">
+              <section class="resume-summary-section resume-section">
+                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-2 py-lg-3">
+                  <i class="resume-section-heading-icon bi bi-person me-2"></i>About Me
+                </h3>
+                <div class="resume-summary-desc">
+                  <p *ngFor="let highlight of highlights">{{ highlight }}</p>
+                </div>
+              </section>
+              <hr />
+              <section class="resume-experience-section resume-section">
+                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
+                  <i class="resume-section-heading-icon bi bi-briefcase me-2"></i>Work Experience
+                </h3>
+                <div class="resume-timeline position-relative">
+                  <article
+                    *ngFor="let workExperience of workExperiences; let last = last"
+                    class="resume-timeline-item position-relative"
+                    [ngClass]="{ 'pb-5': !last }"
+                  >
+                    <div class="resume-timeline-item-header mb-2">
+                      <div class="resume-position-meta d-flex justify-content-between mb-1">
+                        <div class="resume-position-time">{{ workExperience.dateRange }}</div>
+                        <div class="resume-company-name">
+                          <a [href]="workExperience.company.url" target="_blank"
+                            >{{ workExperience.company.name }}<i class="bi bi-box-arrow-up-right ms-2"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <h3 class="resume-position-title mb-1">{{ workExperience.position }}</h3>
+                    </div>
+                    <div class="resume-timeline-item-desc">
+                      <ul class="resume-timeline-list">
+                        <li *ngFor="let responsibility of workExperience.responsibilities">{{ responsibility }}</li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </section>
+            </div>
+            <div class="col-12 col-lg-4 ps-lg-4">
+              <section class="resume-skills-section resume-section">
+                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
+                  <i class="resume-section-heading-icon bi bi-gear me-2"></i>Tech Stack
+                </h3>
+
+                <ul class="list-unstyled">
+                  <li *ngFor="let techSkill of techSkills" class="mb-2">
+                    <div class="resume-skill-name">{{ techSkill.tech }}</div>
+                    <div
+                      class="progress resume-progress"
+                      role="progressbar"
+                      [attr.aria-label]="techSkill.tech"
+                      [attr.aria-valuenow]="techSkill.level"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
+                      <div class="progress-bar resume-progress-bar" [style.width]="techSkill.level + '%'"></div>
+                    </div>
+                  </li>
+                </ul>
+              </section>
+              <hr />
+              <section class="resume-skills-section resume-section">
+                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
+                  <i class="resume-section-heading-icon bi bi-person-gear me-2"></i>Soft Skills
+                </h3>
+                <ul class="list-inline">
+                  <li *ngFor="let softSkill of softSkills" class="list-inline-item">
+                    <span class="badge resume-skill-badge">{{ softSkill }}</span>
+                  </li>
+                </ul>
+              </section>
+              <hr />
+              <section class="resume-projects-section resume-section">
+                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
+                  <i class="resume-section-heading-icon bi bi-trophy me-2"></i>Certifications
+                </h3>
+                <ul class="list-inline">
+                  <li *ngFor="let certification of certifications" class="list-inline-item">
+                    <a [href]="certification.url" target="_blank"
+                      ><span class="badge resume-skill-badge">{{ certification.tech }}<i class="bi bi-box-arrow-up-right ms-2"></i></span
+                    ></a>
+                  </li>
+                </ul>
+              </section>
+              <hr />
+              <section class="resume-educate-section resume-section">
+                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
+                  <i class="resume-section-heading-icon bi bi-book me-2"></i>Education
+                </h3>
+                <ul class="list-unstyled">
+                  <li *ngFor="let educationDegree of educationDegrees" class="mb-2">
+                    <div class="resume-degree font-weight-bold">{{ educationDegree.title }}</div>
+                    <div class="resume-degree-org">{{ educationDegree.institution }}</div>
+                    <div class="resume-degree-time">{{ educationDegree.dateRange }}</div>
+                  </li>
+                </ul>
+              </section>
+              <hr />
+              <section class="resume-lang-section resume-section">
+                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
+                  <i class="resume-section-heading-icon bi bi-translate me-2"></i>Languages
+                </h3>
+                <ul class="list-unstyled resume-lang-list">
+                  <li *ngFor="let spokenLanguage of spokenLanguages" class="mb-2">
+                    <div class="resume-lang-name">{{ spokenLanguage.language }}</div>
+                    <div class="resume-level-indicator row gx-0 flex-nowrap">
+                      <div *ngFor="let level of [].constructor(10); let i = index" class="col">
+                        <span class="item" [ngClass]="{ 'item-full': spokenLanguage.level > i }"> </span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
