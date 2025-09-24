@@ -46,7 +46,7 @@ export class HomeComponent {
     },
   ];
   highlights: string[] = [
-    'I’m a software developer with 8+ years of experience building web applications, both on the frontend and backend. Over the years, I’ve worked on all kinds of projects—from internal tools to user-facing platforms—always trying to write clean, efficient, and reliable code.',
+    'I’m a Full-Stack Developer with 8+ years of experience building web applications, both on the frontend and backend. Over the years, I’ve worked on all kinds of projects—from internal tools to user-facing platforms—always trying to write clean, efficient, and reliable code.',
     'I usually work with JavaScript, TypeScript, Angular, React, Node.js, and NestJS, and I’m also comfortable with .NET, Python (Django), and databases like MySQL and MongoDB. I’ve set up CI/CD pipelines, worked with Docker, and used tools like Azure DevOps, GitHub, and Jira.',
     'I’m used to working remotely and value clear, respectful communication and delivering work on time. I like learning new tech and figuring out the best way to build something that just works well.',
   ];
@@ -146,9 +146,9 @@ export class HomeComponent {
         url: 'https://www.linkedin.com/company/halo-media/',
       },
       dateRange: 'February 2023 - Present',
-      position: 'MEAN Developer',
+      position: 'Full-Stack Developer | MEAN Stack',
       responsibilities: [
-        'Design, build, and maintain front-end code using HTML, CSS, and JavaScript frameworks like Angular and React. Develop server-side logic, APIs, and databases with NodeJS, and No-SQL databases.',
+        'As a Full-Stack Developer, I actively contributed to the development of 4 projects for a major American company. I designed, built, and maintained front-end code, and developed server-side logic, APIs, and databases.',
         'Write clean, maintainable, and well-documented code using best practices. Refactor existing code to enhance performance and readability, and implement automated testing and continuous integration with Azure DevOps.',
         'Work closely with product managers, designers, and other developers to deliver high-quality software. Participate in code reviews and assist in integrating user-facing elements with server-side logic.',
         'Contribute to sprint planning, daily stand-ups, and retrospective meetings. Break down requirements into manageable tasks and ensure timely delivery of features and bug fixes.',
@@ -160,9 +160,9 @@ export class HomeComponent {
         url: 'https://www.linkedin.com/company/globant/',
       },
       dateRange: 'September 2019 - June 2024',
-      position: '.NET Developer',
+      position: 'Full-Stack Developer | .NET & Angular',
       responsibilities: [
-        'Design, build, and maintain front-end code using HTML, CSS, and JavaScript frameworks like Angular and React. Develop server-side logic, APIs, and databases with .NET, and SQL databases.',
+        'As a Full-Stack Developer, I actively contributed to the development of 2 large-scale projects for American companies. I designed, built, and maintained front-end code, and developed server-side logic, APIs, and databases.',
         'Write clean, maintainable, and well-documented code using best practices. Refactor existing code to enhance performance and readability, and implement automated testing and continuous integration with Azure DevOps.',
         'Work closely with product managers, designers, and other developers to deliver high-quality software. Participate in code reviews and assist in integrating user-facing elements with server-side logic.',
         'Contribute to sprint planning, daily stand-ups, and retrospective meetings. Break down requirements into manageable tasks and ensure timely delivery of features and bug fixes.',
@@ -174,9 +174,9 @@ export class HomeComponent {
         url: 'https://www.linkedin.com/company/juntoz/',
       },
       dateRange: 'May 2017 - June 2018',
-      position: 'Web Developer',
+      position: 'Full-Stack Developer Junior | .NET & Angular',
       responsibilities: [
-        'Contribute to the design and development of front-end components using HTML, CSS, and JavaScript frameworks like Angular. Assist in building server-side logic and APIs with .NET.',
+        'As a junior Full-Stack Developer, I assisted in the delivery of 4 projects for retail companies. Contributed to the design and development of front-end components and supported the implementation of server-side logic and APIs.',
         'Work with product managers, designers, and senior developers to implement features and fix bugs. Participate in code reviews to learn best practices and improve code quality.',
         'Attend sprint planning, daily stand-ups, and retrospective meetings. Break down tasks into manageable pieces and provide status updates on progress.',
       ],
