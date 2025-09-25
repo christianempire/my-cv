@@ -47,7 +47,6 @@ export class HomeComponent {
   ];
   highlights: string[] = [
     'I’m a Full-Stack Developer with 8+ years of experience building web applications, both on the frontend and backend. Over the years, I’ve worked on all kinds of projects—from internal tools to user-facing platforms—always trying to write clean, efficient, and reliable code.',
-    'I usually work with JavaScript, TypeScript, Angular, React, Node.js, and NestJS, and I’m also comfortable with .NET, Python (Django), and databases like MySQL and MongoDB. I’ve set up CI/CD pipelines, worked with Docker, and used tools like Azure DevOps, GitHub, and Jira.',
     'I’m used to working remotely and value clear, respectful communication and delivering work on time. I like learning new tech and figuring out the best way to build something that just works well.',
   ];
   softSkills: string[] = [
@@ -63,75 +62,82 @@ export class HomeComponent {
     'Innovation',
     'Flexibility',
   ];
-  spokenLanguages: { language: string; level: number }[] = [
+  spokenLanguages: { language: string; proficiency: string; level: number }[] = [
     {
       language: 'Spanish',
+      proficiency: 'Native',
       level: 10,
     },
     {
       language: 'English',
+      proficiency: 'Fluent',
       level: 9,
     },
   ];
   techSkills: {
     tech: string;
+    years: number;
     level: number;
   }[] = [
     {
       tech: '.NET',
+      years: 8,
       level: 100,
     },
     {
       tech: 'Angular',
+      years: 8,
       level: 100,
     },
     {
       tech: 'C#',
+      years: 8,
       level: 100,
     },
     {
       tech: 'DevOps',
-      level: 60,
-    },
-    {
-      tech: 'Django',
-      level: 40,
+      years: 6,
+      level: 75,
     },
     {
       tech: 'Docker',
-      level: 40,
+      years: 2,
+      level: 25,
     },
     {
       tech: 'Git',
-      level: 80,
+      years: 8,
+      level: 100,
     },
     {
       tech: 'JavaScript',
+      years: 8,
       level: 100,
     },
     {
       tech: 'MongoDB',
-      level: 60,
+      years: 2,
+      level: 25,
     },
     {
       tech: 'Node.js',
-      level: 80,
+      years: 4,
+      level: 50,
     },
     {
-      tech: 'Python',
-      level: 80,
+      tech: 'React',
+      years: 2,
+      level: 25,
     },
     {
       tech: 'SQL',
-      level: 80,
+      years: 6,
+      level: 75,
     },
     {
       tech: 'TypeScript',
-      level: 100,
-    },
-    {
-      tech: 'Unity',
-      level: 40,
+      years: 4,
+      level: 50,
     },
   ].sort((a, b) => b.level - a.level);
   workExperiences: {
@@ -145,7 +151,7 @@ export class HomeComponent {
         name: 'Halo Media',
         url: 'https://www.linkedin.com/company/halo-media/',
       },
-      dateRange: 'February 2023 - Present',
+      dateRange: '2023 - 2025 · 2 yrs',
       position: 'Full-Stack Developer | MEAN Stack',
       responsibilities: [
         'As a Full-Stack Developer, I actively contributed to the development of 4 projects for a major American company. I designed, built, and maintained front-end code, and developed server-side logic, APIs, and databases.',
@@ -159,7 +165,7 @@ export class HomeComponent {
         name: 'Globant',
         url: 'https://www.linkedin.com/company/globant/',
       },
-      dateRange: 'September 2019 - June 2024',
+      dateRange: '2019 - 2024 · 5 yrs',
       position: 'Full-Stack Developer | .NET & Angular',
       responsibilities: [
         'As a Full-Stack Developer, I actively contributed to the development of 2 large-scale projects for American companies. I designed, built, and maintained front-end code, and developed server-side logic, APIs, and databases.',
@@ -170,10 +176,32 @@ export class HomeComponent {
     },
     {
       company: {
+        name: 'Apps2go Perú',
+        url: 'https://www.linkedin.com/company/apps2go-per%C3%BA/',
+      },
+      dateRange: '2019 - 2020 · 1 yr',
+      position: 'Full-stack Developer | .NET & Android',
+      responsibilities: [
+        'As a Full-Stack Developer, I developed a marketplace mobile app and its API for the company owner, based on provided designs and requirements.',
+      ],
+    },
+    {
+      company: {
+        name: 'KODOTI',
+        url: 'https://www.linkedin.com/company/kodoti/',
+      },
+      dateRange: '2018 - 2019 · 1 yr',
+      position: 'Frontend Developer | Vue.js',
+      responsibilities: [
+        'As a Frontend Developer, I developed an e-learning platform website for the company owner, based on provided designs and requirements.',
+      ],
+    },
+    {
+      company: {
         name: 'Juntoz',
         url: 'https://www.linkedin.com/company/juntoz/',
       },
-      dateRange: 'May 2017 - June 2018',
+      dateRange: '2017 - 2018 · 1 yr',
       position: 'Full-Stack Developer Junior | .NET & Angular',
       responsibilities: [
         'As a junior Full-Stack Developer, I assisted in the delivery of 4 projects for retail companies. Contributed to the design and development of front-end components and supported the implementation of server-side logic and APIs.',

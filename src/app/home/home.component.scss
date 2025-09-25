@@ -1,8 +1,32 @@
 .resume-company-name {
   a {
-    color: #a5b3ce;
+    color: #ffffff;
     text-decoration: none;
   }
+}
+
+.resume-lang-name {
+  display: flex;
+  align-items: center;
+}
+
+.resume-lang-proficiency {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: #a5b3ce;
+  margin-left: auto;
+}
+
+.resume-skill-name {
+  display: flex;
+  align-items: center;
+}
+
+.resume-skill-years {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: #a5b3ce;
+  margin-left: auto;
 }
 
 @media (min-width: 992px) {

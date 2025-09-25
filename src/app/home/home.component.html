@@ -75,7 +75,7 @@
 
                 <ul class="list-unstyled">
                   <li *ngFor="let techSkill of techSkills" class="mb-2">
-                    <div class="resume-skill-name">{{ techSkill.tech }}</div>
+                    <div class="resume-skill-name">{{ techSkill.tech }}<div class="resume-skill-years">{{ techSkill.years }} yrs</div></div>
                     <div
                       class="progress resume-progress"
                       role="progressbar"
@@ -133,7 +133,7 @@
                 </h3>
                 <ul class="list-unstyled resume-lang-list">
                   <li *ngFor="let spokenLanguage of spokenLanguages" class="mb-2">
-                    <div class="resume-lang-name">{{ spokenLanguage.language }}</div>
+                    <div class="resume-lang-name">{{ spokenLanguage.language }}<div class="resume-lang-proficiency">{{ spokenLanguage.proficiency }}</div></div>
                     <div class="resume-level-indicator row gx-0 flex-nowrap">
                       <div *ngFor="let level of [].constructor(10); let i = index" class="col">
                         <span class="item" [ngClass]="{ 'item-full': spokenLanguage.level > i }"> </span>
