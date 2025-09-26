@@ -90,6 +90,11 @@ export class HomeComponent {
       level: 100,
     },
     {
+      tech: 'AWS',
+      years: 1,
+      level: 13,
+    },
+    {
       tech: 'C#',
       years: 8,
       level: 100,
