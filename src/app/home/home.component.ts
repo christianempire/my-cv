@@ -328,8 +328,8 @@ export class HomeComponent {
                 position: 'Full-Stack Developer | .NET & Angular',
                 responsibilities: [
                   'As a Full-Stack Developer, I contributed to laying the foundations of a request platform for a multinational company in the banking sector. I designed, developed, and maintained the frontend, as well as the server-side logic, APIs, and databases.',
-                  'Trabajé estrechamente con gerentes de producto, diseñadores y otros desarrolladores para entregar software de alta calidad. Participé en revisiones de código y ayudé a integrar elementos orientados al usuario con la lógica del servidor.',
-                  'Contribuí en la planificación de sprints, reuniones diarias y retrospectivas. Dividí requisitos en tareas manejables y aseguré la entrega oportuna de funcionalidades y correcciones de errores.',
+                  'Work closely with product managers, designers, and other developers to deliver high-quality software. Participate in code reviews and assist in integrating user-facing elements with server-side logic.',
+                  'Contribute to sprint planning, daily stand-ups, and retrospective meetings. Break down requirements into manageable tasks and ensure timely delivery of features and bug fixes.',
                 ],
               },
               {
