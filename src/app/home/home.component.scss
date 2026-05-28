@@ -1,36 +1,3 @@
-.resume-company-name {
-  a {
-    color: #ffffff;
-    text-decoration: none;
-  }
-}
-
-.resume-lang-name {
-  display: flex;
-  align-items: center;
-}
-
-.resume-lang-proficiency {
-  font-size: 0.75rem;
-  font-weight: normal;
-  color: #a5b3ce;
-  margin-left: auto;
-}
-
-.resume-skill-name {
-  display: flex;
-  align-items: center;
-}
-
-.resume-skill-years {
-  font-size: 0.75rem;
-  font-weight: normal;
-  color: #a5b3ce;
-  margin-left: auto;
-}
-
-@media (min-width: 992px) {
-  .resume-wrapper {
-    max-width: 100%;
-  }
-}
+/* Home component styles live in src/styles.scss (global) so that all
+   CV-specific styling stays in one place and we don't blow the per-component
+   style budget. This file is intentionally empty. */

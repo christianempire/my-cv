@@ -1,157 +1,175 @@
-<div class="container-fluid pb-4">
-  <div class="main-content-wrapper">
-    <div class="container-fluid">
-      <div class="resume-wrapper mx-auto rounded-2">
-        <div class="resume-header px-4 px-lg-5">
-          <div class="resume-profile-holder text-center">
-            <img class="resume-profile-pic rounded-circle" src="images/profile.png" alt="image" />
-            <h2 class="resume-name text-uppercase">Christian Changa</h2>
-            <div class="resume-role-title text-uppercase">{{ headers.main }}</div>
-            <div class="resume-contact mt-4">
-              <ul class="resume-contact-list list-unstyled list-inline mb-0 justify-content-between">
-                <li class="list-inline-item me-md-3 me-lg-5">
-                  <i class="resume-contact-icon bi bi-whatsapp me-2"></i>
-                  +51 993 279 957
-                </li>
-                <li class="list-inline-item me-md-3 me-lg-5">
-                  <i class="resume-contact-icon bi bi-envelope me-2"></i>
-                  christian.changa.94&#64;gmail.com
-                </li>
-                <li class="list-inline-item me-lg-5">
-                  <i class="resume-contact-icon bi bi-linkedin me-2"></i>
-                  linkedin.com/in/christian-changa
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="resume-body p-4 p-lg-5">
-          <div class="row">
-            <div class="col-main col-12 col-lg-8 pe-lg-4">
-              <section class="resume-summary-section resume-section">
-                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-2 py-lg-3">
-                  <i class="resume-section-heading-icon bi bi-person me-2"></i>{{ headers.aboutMe }}
-                </h3>
-                <div class="resume-summary-desc">
-                  <p *ngFor="let highlight of highlights">{{ highlight }}</p>
-                </div>
-              </section>
-              <hr />
-              <section class="resume-experience-section resume-section">
-                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
-                  <i class="resume-section-heading-icon bi bi-briefcase me-2"></i>{{ headers.workExperience }}
-                </h3>
-                <div class="resume-timeline position-relative">
-                  <article
-                    *ngFor="let workExperience of workExperiences; let last = last"
-                    class="resume-timeline-item position-relative"
-                    [ngClass]="{ 'pb-5': !last }"
-                  >
-                    <div class="resume-timeline-item-header mb-2">
-                      <div class="resume-position-meta d-flex justify-content-between mb-1">
-                        <div class="resume-position-time">{{ workExperience.dateRange }}</div>
-                        <div class="resume-company-name">
-                          <a [href]="workExperience.company.url" target="_blank"
-                            >{{ workExperience.company.name }}<i class="bi bi-box-arrow-up-right ms-2"></i
-                          ></a>
-                        </div>
-                      </div>
-                      <h3 class="resume-position-title mb-1">{{ workExperience.position }}</h3>
-                    </div>
-                    <div class="resume-timeline-item-desc">
-                      <ul class="resume-timeline-list">
-                        <li *ngFor="let responsibility of workExperience.responsibilities">{{ responsibility }}</li>
-                      </ul>
-                    </div>
-                  </article>
-                </div>
-              </section>
-            </div>
-            <div class="col-12 col-lg-4 ps-lg-4">
-              <section class="resume-skills-section resume-section">
-                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
-                  <i class="resume-section-heading-icon bi bi-gear me-2"></i>{{ headers.techStack }}
-                </h3>
-
-                <ul class="list-unstyled">
-                  <li *ngFor="let techSkill of techSkills" class="mb-2">
-                    <div class="resume-skill-name">
-                      {{ techSkill.tech }}
-                      <div class="resume-skill-years">{{ techSkill.years }} {{ getYearLabel(techSkill.years) }}</div>
-                    </div>
-                    <div
-                      class="progress resume-progress"
-                      role="progressbar"
-                      [attr.aria-label]="techSkill.tech"
-                      [attr.aria-valuenow]="techSkill.level"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    >
-                      <div class="progress-bar resume-progress-bar" [style.width]="techSkill.level + '%'"></div>
-                    </div>
-                  </li>
-                </ul>
-              </section>
-              <hr />
-              <section class="resume-skills-section resume-section">
-                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
-                  <i class="resume-section-heading-icon bi bi-person-gear me-2"></i>{{ headers.softSkills }}
-                </h3>
-                <ul class="list-inline">
-                  <li *ngFor="let softSkill of softSkills" class="list-inline-item">
-                    <span class="badge resume-skill-badge">{{ softSkill }}</span>
-                  </li>
-                </ul>
-              </section>
-              <hr />
-              <section class="resume-projects-section resume-section">
-                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
-                  <i class="resume-section-heading-icon bi bi-trophy me-2"></i>{{ headers.certifications }}
-                </h3>
-                <ul class="list-inline">
-                  <li *ngFor="let certification of certifications" class="list-inline-item">
-                    <a [href]="certification.url" target="_blank"
-                      ><span class="badge resume-skill-badge">{{ certification.tech }}<i class="bi bi-box-arrow-up-right ms-2"></i></span
-                    ></a>
-                  </li>
-                </ul>
-              </section>
-              <hr />
-              <section class="resume-educate-section resume-section">
-                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
-                  <i class="resume-section-heading-icon bi bi-book me-2"></i>{{ headers.education }}
-                </h3>
-                <ul class="list-unstyled">
-                  <li *ngFor="let educationDegree of educationDegrees" class="mb-2">
-                    <div class="resume-degree font-weight-bold">{{ educationDegree.title }}</div>
-                    <div class="resume-degree-org">{{ educationDegree.institution }}</div>
-                    <div class="resume-degree-time">{{ educationDegree.dateRange }}</div>
-                  </li>
-                </ul>
-              </section>
-              <hr />
-              <section class="resume-lang-section resume-section">
-                <h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3">
-                  <i class="resume-section-heading-icon bi bi-translate me-2"></i>{{ headers.languages }}
-                </h3>
-                <ul class="list-unstyled resume-lang-list">
-                  <li *ngFor="let spokenLanguage of spokenLanguages" class="mb-2">
-                    <div class="resume-lang-name">
-                      {{ spokenLanguage.language }}
-                      <div class="resume-lang-proficiency">{{ spokenLanguage.proficiency }}</div>
-                    </div>
-                    <div class="resume-level-indicator row gx-0 flex-nowrap">
-                      <div *ngFor="let level of [].constructor(10); let i = index" class="col">
-                        <span class="item" [ngClass]="{ 'item-full': spokenLanguage.level > i }"> </span>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </section>
-            </div>
-          </div>
-        </div>
-      </div>
+<main class="page" data-screen-label="CV">
+  <section class="controls" role="toolbar" aria-label="CV controls">
+    <span class="label">{{ headers.themeLabel }}</span>
+    <div class="group">
+      <button type="button" [class.on]="theme === 'light'" (click)="setTheme('light')">{{ headers.themeLight }}</button>
+      <button type="button" [class.on]="theme === 'dark'" (click)="setTheme('dark')">{{ headers.themeDark }}</button>
     </div>
+
+    <span class="label">{{ headers.photoLabel }}</span>
+    <div class="group">
+      <button type="button" [class.on]="photo === 'on'" (click)="setPhoto('on')">{{ headers.photoShow }}</button>
+      <button type="button" [class.on]="photo === 'off'" (click)="setPhoto('off')">{{ headers.photoHide }}</button>
+    </div>
+
+    <span class="label">{{ headers.densityLabel }}</span>
+    <div class="group">
+      <button type="button" [class.on]="density === 'comfortable'" (click)="setDensity('comfortable')">{{ headers.densityComfortable }}</button>
+      <button type="button" [class.on]="density === 'compact'" (click)="setDensity('compact')">{{ headers.densityCompact }}</button>
+    </div>
+
+    <span class="label">Lang</span>
+    <div class="group">
+      <button type="button" [class.on]="lang === 'EN'" (click)="setLang('EN')">EN</button>
+      <button type="button" [class.on]="lang === 'ES'" (click)="setLang('ES')">ES</button>
+    </div>
+
+    <span class="spacer"></span>
+    <button class="print-btn" type="button" (click)="print()">⌘P · {{ headers.printBtn }}</button>
+  </section>
+
+  <div class="full-stage">
+    <article class="cv" [attr.data-theme]="theme" [attr.data-photo]="photo" [attr.data-density]="density" [attr.aria-label]="name + ' CV'">
+      <header class="cv-head">
+        <div class="id">
+          <h1 class="cv-name">{{ name }}</h1>
+          <p class="cv-role">{{ headers.roleTitle }}</p>
+          <ul class="cv-contact">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M3 7l9 6 9-6" />
+                <rect x="3" y="5" width="18" height="14" rx="1.5" />
+              </svg>
+              <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path
+                  d="M21 16.5v2.7a1.8 1.8 0 0 1-2 1.8 17.7 17.7 0 0 1-7.7-2.8 17.4 17.4 0 0 1-5.4-5.4A17.7 17.7 0 0 1 3.1 5a1.8 1.8 0 0 1 1.8-2h2.7a1.8 1.8 0 0 1 1.8 1.5l.6 3a1.8 1.8 0 0 1-.4 1.6L8.3 10.4a14 14 0 0 0 5.3 5.3l1.3-1.3a1.8 1.8 0 0 1 1.6-.4l3 .6a1.8 1.8 0 0 1 1.5 1.9z"
+                />
+              </svg>
+              <span>{{ contact.phone }}</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4v11H3v-11zM10 9.5h3.8v1.6h.05c.53-1 1.84-2.05 3.78-2.05 4.05 0 4.8 2.66 4.8 6.12V20.5h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.85 1.25-1.85 2.54v4.88h-4V9.5z"
+                />
+              </svg>
+              <a [href]="contact.linkedinUrl" target="_blank" rel="noopener">{{ contact.linkedinLabel }}</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M12 2a10 10 0 0 0-3.16 19.5c.5.09.68-.22.68-.49v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.04 1.53 1.04.9 1.53 2.34 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.91.68 1.84v2.73c0 .27.18.59.69.49A10 10 0 0 0 12 2z"
+                />
+              </svg>
+              <a [href]="contact.githubUrl" target="_blank" rel="noopener">{{ contact.githubLabel }}</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18" />
+              </svg>
+              <span>{{ headers.location }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="cv-photo" aria-hidden="true">
+          <img src="images/profile.png" alt="" />
+        </div>
+      </header>
+
+      <section class="cv-highlights" [attr.aria-label]="headers.highlightsAria">
+        <div class="hl" *ngFor="let h of highlights">
+          <p class="num">{{ h.num }}<small>{{ h.suffix }}</small></p>
+          <p class="lab">{{ h.label }}</p>
+        </div>
+      </section>
+
+      <div class="cv-body">
+        <div class="cv-main">
+          <section class="cv-sec">
+            <h3>{{ headers.about }}</h3>
+            <p class="cv-about" [innerHTML]="about"></p>
+          </section>
+
+          <section class="cv-sec">
+            <h3>{{ headers.workExperience }}</h3>
+            <div class="tl">
+              <div class="role" *ngFor="let role of roles">
+                <div class="when">
+                  <span class="yr">{{ role.yearRange }}</span>
+                  <span class="dur">{{ role.duration }}</span>
+                </div>
+                <div class="body">
+                  <h4>
+                    {{ role.position }}
+                    <span class="co">·
+                      <a [href]="role.company.url" target="_blank" rel="noopener">{{ role.company.name }}</a>
+                    </span>
+                  </h4>
+                  <p class="stack">{{ role.stack }}</p>
+                  <ul>
+                    <li *ngFor="let r of role.responsibilities" [innerHTML]="r"></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="cv-side">
+          <section class="cv-sec">
+            <h3>{{ headers.techStack }}</h3>
+            <div class="skill-grp" *ngFor="let g of techGroups">
+              <p class="grp-h"><span>{{ g.label }}</span><span class="yrs">{{ g.yearsLabel }}</span></p>
+              <div class="skill-list">
+                <span *ngFor="let s of g.skills" class="skill" [class.lead]="s.lead">{{ s.name }}</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="cv-sec">
+            <h3>{{ headers.softSkills }}</h3>
+            <ul class="soft">
+              <li *ngFor="let s of softSkills">{{ s }}</li>
+            </ul>
+          </section>
+
+          <section class="cv-sec">
+            <h3>{{ headers.certifications }}</h3>
+            <div class="certs">
+              <a *ngFor="let c of certifications" [href]="c.url" target="_blank" rel="noopener" class="cert">
+                {{ c.tech }}<span class="y" *ngIf="c.year">{{ c.year }}</span>
+              </a>
+            </div>
+          </section>
+
+          <section class="cv-sec edu">
+            <h3>{{ headers.education }}</h3>
+            <ng-container *ngFor="let e of education">
+              <p class="deg">{{ e.degree }}</p>
+              <p class="school">{{ e.school }}</p>
+              <span class="when">{{ e.dateRange }}</span>
+            </ng-container>
+          </section>
+
+          <section class="cv-sec">
+            <h3>{{ headers.languages }}</h3>
+            <ul class="langs">
+              <li *ngFor="let l of spokenLanguages">
+                <span>{{ l.language }}</span><span class="lvl">{{ l.proficiency }}</span>
+              </li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+
+      <footer class="cv-foot">
+        <span>{{ name }} · CV · 2026</span>
+        <span>{{ headers.page }}</span>
+      </footer>
+    </article>
   </div>
-</div>
+</main>

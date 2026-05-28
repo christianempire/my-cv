@@ -1,6 +1,37 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+type Lang = 'EN' | 'ES';
+type Theme = 'light' | 'dark';
+type Photo = 'on' | 'off';
+type Density = 'comfortable' | 'compact';
+
+interface Highlight {
+  num: string;
+  suffix: string;
+  label: string;
+}
+
+interface Role {
+  yearRange: string;
+  duration: string;
+  position: string;
+  company: { name: string; url: string };
+  stack: string;
+  responsibilities: string[];
+}
+
+interface SkillGroup {
+  label: string;
+  yearsLabel: string;
+  skills: { name: string; lead?: boolean }[];
+}
+
+interface SpokenLanguage {
+  language: string;
+  proficiency: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -9,397 +40,370 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  lang: 'EN' | 'ES' = 'EN';
-  headers: {
-    main?: string;
-    aboutMe?: string;
-    workExperience?: string;
-    techStack?: string;
-    softSkills?: string;
-    certifications?: string;
-    education?: string;
-    languages?: string;
-  } = {};
-  certifications: { tech: string; url: string }[] = [
-    {
-      tech: 'Angular',
-      url: 'https://www.udemy.com/certificate/UC-0c2da545-7a78-4d99-a127-c2aa86f98e3f/',
-    },
-    {
-      tech: 'NodeJS',
-      url: 'https://www.udemy.com/certificate/UC-bff821ee-301a-463f-ad72-9639ee2888fe/',
-    },
-    {
-      tech: '.NET',
-      url: 'https://www.udemy.com/certificate/UC-ccccb339-13da-4cf8-91e0-92e95bdd64d9/',
-    },
-    {
-      tech: 'Django',
-      url: 'https://www.udemy.com/certificate/UC-f7caccc8-d888-423d-9a59-46441f690b2b/',
-    },
-    {
-      tech: 'MySQL',
-      url: 'https://www.udemy.com/certificate/UC-2f5e5be2-3395-4b05-ac53-fd3e708ba5ad/',
-    },
-    {
-      tech: 'MongoDB',
-      url: 'https://www.udemy.com/certificate/UC-2f5e5be2-3395-4b05-ac53-fd3e708ba5ad/',
-    },
-    {
-      tech: 'DevOps',
-      url: 'https://www.udemy.com/certificate/UC-d43b3357-bdc2-4792-b32c-f38a31059e1f/',
-    },
-  ];
-  educationDegrees: { title: string; institution: string; dateRange: string }[] = [];
-  highlights: string[] = [];
-  softSkills: string[] = [];
-  spokenLanguages: { language: string; proficiency: string; level: number }[] = [];
-  techSkills: {
-    tech: string;
-    years: number;
-    level: number;
-  }[] = [
-    {
-      tech: '.NET',
-      years: 9,
-      level: 100,
-    },
-    {
-      tech: 'Angular',
-      years: 9,
-      level: 100,
-    },
-    {
-      tech: 'AWS',
-      years: 1,
-      level: 13,
-    },
-    {
-      tech: 'C#',
-      years: 9,
-      level: 100,
-    },
-    {
-      tech: 'DevOps',
-      years: 7,
-      level: 75,
-    },
-    {
-      tech: 'Docker',
-      years: 2,
-      level: 25,
-    },
-    {
-      tech: 'Git',
-      years: 9,
-      level: 100,
-    },
-    {
-      tech: 'JavaScript',
-      years: 9,
-      level: 100,
-    },
-    {
-      tech: 'MongoDB',
-      years: 2,
-      level: 25,
-    },
-    {
-      tech: 'Node.js',
-      years: 5,
-      level: 50,
-    },
-    {
-      tech: 'Python',
-      years: 2,
-      level: 25,
-    },
-    {
-      tech: 'React',
-      years: 2,
-      level: 25,
-    },
-    {
-      tech: 'SQL',
-      years: 7,
-      level: 75,
-    },
-    {
-      tech: 'TypeScript',
-      years: 5,
-      level: 50,
-    },
-  ].sort((a, b) => b.level - a.level);
-  workExperiences: {
-    company: { name: string; url: string };
-    dateRange: string;
-    position: string;
-    responsibilities: string[];
-  }[] = [];
+  lang: Lang = 'EN';
+  theme: Theme = 'light';
+  photo: Photo = 'on';
+  density: Density = 'comfortable';
 
-  constructor(private route: ActivatedRoute) {
+  name = 'Christian Changa';
+
+  contact = {
+    email: 'christian.changa.94@gmail.com',
+    phone: '+51 993 279 957',
+    linkedinLabel: 'linkedin.com/in/christian-changa',
+    linkedinUrl: 'https://linkedin.com/in/christian-changa',
+    githubLabel: 'github.com/christianempire',
+    githubUrl: 'https://github.com/christianempire',
+  };
+
+  headers: {
+    roleTitle: string;
+    location: string;
+    about: string;
+    workExperience: string;
+    techStack: string;
+    softSkills: string;
+    certifications: string;
+    education: string;
+    languages: string;
+    highlightsAria: string;
+    themeLabel: string;
+    photoLabel: string;
+    densityLabel: string;
+    themeLight: string;
+    themeDark: string;
+    photoShow: string;
+    photoHide: string;
+    densityComfortable: string;
+    densityCompact: string;
+    printBtn: string;
+    page: string;
+  } = this.buildHeaders('EN');
+
+  highlights: Highlight[] = [];
+  about = '';
+  roles: Role[] = [];
+  techGroups: SkillGroup[] = [];
+  softSkills: string[] = [];
+  certifications: { tech: string; url: string; year?: string }[] = [];
+  education: { degree: string; school: string; dateRange: string }[] = [];
+  spokenLanguages: SpokenLanguage[] = [];
+
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParamMap.subscribe((params) => {
       const langParam = params.get('lang');
-      console.log('Lang param:', langParam);
-      if (langParam === 'ES' || langParam === 'EN') {
-        this.lang = langParam;
-      }
+      const themeParam = params.get('theme');
+      const photoParam = params.get('photo');
+      const densityParam = params.get('density');
 
-      if (this.lang === 'ES') {
-        console.log('Language set to Spanish (ES)');
-      } else {
-        console.log('Language set to English (EN)');
-      }
+      if (langParam === 'EN' || langParam === 'ES') this.lang = langParam;
+      if (themeParam === 'light' || themeParam === 'dark') this.theme = themeParam;
+      if (photoParam === 'on' || photoParam === 'off') this.photo = photoParam;
+      if (densityParam === 'comfortable' || densityParam === 'compact') this.density = densityParam;
 
-      this.headers = {
-        main: this.lang === 'ES' ? 'Desarrollador Full-Stack' : 'Full-Stack Developer',
-        aboutMe: this.lang === 'ES' ? 'Sobre mí' : 'About Me',
-        workExperience: this.lang === 'ES' ? 'Experiencia Laboral' : 'Work Experience',
-        techStack: this.lang === 'ES' ? 'Stack Tecnológico' : 'Tech Stack',
-        softSkills: this.lang === 'ES' ? 'Habilidades Blandas' : 'Soft Skills',
-        certifications: this.lang === 'ES' ? 'Certificaciones' : 'Certifications',
-        education: this.lang === 'ES' ? 'Educación' : 'Education',
-        languages: this.lang === 'ES' ? 'Idiomas' : 'Languages',
-      };
-      this.educationDegrees = [
-        this.lang === 'ES'
-          ? {
-              title: 'Bachiller en Ingeniería Informática',
-              institution: 'Universidad de Lima',
-              dateRange: '2014 - 2020',
-            }
-          : {
-              title: 'Bachelor of Informatics Engineering',
-              institution: 'University of Lima',
-              dateRange: '2014 - 2020',
-            },
-      ];
-      this.highlights =
-        this.lang === 'ES'
-          ? [
-              'Soy un Desarrollador Full-Stack con más de 9 años de experiencia construyendo aplicaciones web, tanto en frontend como en backend. A lo largo de los años, he trabajado en todo tipo de proyectos, desde herramientas internas hasta plataformas orientadas al usuario, siempre procurando escribir código limpio, eficiente y confiable.',
-              'Estoy acostumbrado a trabajar de forma remota y valoro la comunicación clara y respetuosa, así como entregar el trabajo a tiempo. Me gusta aprender nuevas tecnologías y encontrar la mejor manera de construir algo que simplemente funcione bien.',
-            ]
-          : [
-              'I’m a Full-Stack Developer with 9+ years of experience building web applications, both on the frontend and backend. Over the years, I’ve worked on all kinds of projects—from internal tools to user-facing platforms—always trying to write clean, efficient, and reliable code.',
-              'I’m used to working remotely and value clear, respectful communication and delivering work on time. I like learning new tech and figuring out the best way to build something that just works well.',
-            ];
-      this.softSkills =
-        this.lang === 'ES'
-          ? [
-              'Resolución de Problemas',
-              'Colaboración en Equipo',
-              'Comunicación Efectiva',
-              'Aprendizaje Continuo',
-              'Adaptabilidad',
-              'Gestión del Tiempo',
-              'Creatividad',
-              'Liderazgo',
-              'Fiabilidad',
-              'Innovación',
-              'Flexibilidad',
-            ]
-          : [
-              'Problem-Solving',
-              'Team Collaboration',
-              'Effective Communication',
-              'Continuous Learning',
-              'Adaptability',
-              'Time Management',
-              'Creativity',
-              'Leadership',
-              'Reliability',
-              'Innovation',
-              'Flexibility',
-            ];
-      this.spokenLanguages =
-        this.lang === 'ES'
-          ? [
-              {
-                language: 'Español',
-                proficiency: 'Nativo',
-                level: 10,
-              },
-              {
-                language: 'Inglés',
-                proficiency: 'Fluido',
-                level: 9,
-              },
-            ]
-          : [
-              {
-                language: 'Spanish',
-                proficiency: 'Native',
-                level: 10,
-              },
-              {
-                language: 'English',
-                proficiency: 'Fluent',
-                level: 9,
-              },
-            ];
-      this.workExperiences =
-        this.lang === 'ES'
-          ? [
-              {
-                company: {
-                  name: 'NUBELITY',
-                  url: 'https://www.linkedin.com/company/nubelity-llc/',
-                },
-                dateRange: '2025 - 2026 · 1 año',
-                position: 'Desarrollador Full-Stack | .NET & Angular',
-                responsibilities: [
-                  'Como Desarrollador Full-Stack, contribuí a sentar las bases de una plataforma de solicitudes para una empresa multinacional del sector bancario. Diseñé, desarrollé y mantuve el frontend, así como la lógica del servidor, APIs y bases de datos.',
-                  'Trabajé estrechamente con gerentes de producto, diseñadores y otros desarrolladores para entregar software de alta calidad. Participé en revisiones de código y ayudé a integrar elementos orientados al usuario con la lógica del servidor.',
-                  'Contribuí en la planificación de sprints, reuniones diarias y retrospectivas. Dividí requisitos en tareas manejables y aseguré la entrega oportuna de funcionalidades y correcciones de errores.',
-                ],
-              },
-              {
-                company: {
-                  name: 'Halo Media',
-                  url: 'https://www.linkedin.com/company/halo-media/',
-                },
-                dateRange: '2023 - 2025 · 2 años',
-                position: 'Desarrollador Full-Stack | MEAN Stack',
-                responsibilities: [
-                  'Como Desarrollador Full-Stack, contribuí activamente al desarrollo de 4 proyectos para una importante empresa estadounidense. Diseñé, construí y mantuve el código frontend, y desarrollé lógica del servidor, APIs y bases de datos.',
-                  'Escribí código limpio, mantenible y bien documentado siguiendo las mejores prácticas. Refactoricé código existente para mejorar el rendimiento y la legibilidad, e implementé pruebas automatizadas e integración continua con Azure DevOps.',
-                  'Trabajé estrechamente con gerentes de producto, diseñadores y otros desarrolladores para entregar software de alta calidad. Participé en revisiones de código y ayudé a integrar elementos orientados al usuario con la lógica del servidor.',
-                  'Contribuí en la planificación de sprints, reuniones diarias y retrospectivas. Dividí requisitos en tareas manejables y aseguré la entrega oportuna de funcionalidades y correcciones de errores.',
-                ],
-              },
-              {
-                company: {
-                  name: 'Globant',
-                  url: 'https://www.linkedin.com/company/globant/',
-                },
-                dateRange: '2019 - 2024 · 5 años',
-                position: 'Desarrollador Full-Stack | .NET & Angular',
-                responsibilities: [
-                  'Como Desarrollador Full-Stack, contribuí activamente al desarrollo de 2 proyectos a gran escala para empresas estadounidenses. Diseñé, construí y mantuve el código frontend, y desarrollé lógica del servidor, APIs y bases de datos.',
-                  'Escribí código limpio, mantenible y bien documentado siguiendo las mejores prácticas. Refactoricé código existente para mejorar el rendimiento y la legibilidad, e implementé pruebas automatizadas e integración continua con Azure DevOps.',
-                  'Trabajé estrechamente con gerentes de producto, diseñadores y otros desarrolladores para entregar software de alta calidad. Participé en revisiones de código y ayudé a integrar elementos orientados al usuario con la lógica del servidor.',
-                  'Contribuí en la planificación de sprints, reuniones diarias y retrospectivas. Dividí requisitos en tareas manejables y aseguré la entrega oportuna de funcionalidades y correcciones de errores.',
-                ],
-              },
-              {
-                company: {
-                  name: 'Apps2go Perú',
-                  url: 'https://www.linkedin.com/company/apps2go-per%C3%BA/',
-                },
-                dateRange: '2019 - 2020 · 1 año',
-                position: 'Desarrollador Full-Stack | .NET & Android',
-                responsibilities: [
-                  'Como Desarrollador Full-Stack, desarrollé una aplicación móvil de marketplace y su API para el propietario de la empresa, basándome en los diseños y requisitos proporcionados.',
-                ],
-              },
-              {
-                company: {
-                  name: 'KODOTI',
-                  url: 'https://www.linkedin.com/company/kodoti/',
-                },
-                dateRange: '2018 - 2019 · 1 año',
-                position: 'Desarrollador Frontend | Vue.js',
-                responsibilities: [
-                  'Como Desarrollador Frontend, desarrollé el sitio web de una plataforma de e-learning para el propietario de la empresa, basándome en los diseños y requisitos proporcionados.',
-                ],
-              },
-              {
-                company: {
-                  name: 'Juntoz',
-                  url: 'https://www.linkedin.com/company/juntoz/',
-                },
-                dateRange: '2017 - 2018 · 1 año',
-                position: 'Desarrollador Full-Stack Junior | .NET & Angular',
-                responsibilities: [
-                  'Como Desarrollador Full-Stack Junior, asistí en la entrega de 4 proyectos para empresas de retail. Contribuí al diseño y desarrollo de componentes frontend y apoyé la implementación de lógica del servidor y APIs.',
-                  'Trabajé con gerentes de producto, diseñadores y desarrolladores senior para implementar funcionalidades y corregir errores. Participé en revisiones de código para aprender mejores prácticas y mejorar la calidad del código.',
-                  'Asistí a la planificación de sprints, reuniones diarias y retrospectivas. Dividí tareas en partes manejables y proporcioné actualizaciones de estado sobre el progreso.',
-                ],
-              },
-            ]
-          : [
-              {
-                company: {
-                  name: 'NUBELITY',
-                  url: 'https://www.linkedin.com/company/nubelity-llc/',
-                },
-                dateRange: '2025 - 2026 · 1 yr',
-                position: 'Full-Stack Developer | .NET & Angular',
-                responsibilities: [
-                  'As a Full-Stack Developer, I contributed to laying the foundations of a request platform for a multinational company in the banking sector. I designed, developed, and maintained the frontend, as well as the server-side logic, APIs, and databases.',
-                  'Work closely with product managers, designers, and other developers to deliver high-quality software. Participate in code reviews and assist in integrating user-facing elements with server-side logic.',
-                  'Contribute to sprint planning, daily stand-ups, and retrospective meetings. Break down requirements into manageable tasks and ensure timely delivery of features and bug fixes.',
-                ],
-              },
-              {
-                company: {
-                  name: 'Halo Media',
-                  url: 'https://www.linkedin.com/company/halo-media/',
-                },
-                dateRange: '2023 - 2025 · 2 yrs',
-                position: 'Full-Stack Developer | MEAN Stack',
-                responsibilities: [
-                  'As a Full-Stack Developer, I actively contributed to the development of 4 projects for a major American company. I designed, built, and maintained front-end code, and developed server-side logic, APIs, and databases.',
-                  'Write clean, maintainable, and well-documented code using best practices. Refactor existing code to enhance performance and readability, and implement automated testing and continuous integration with Azure DevOps.',
-                  'Work closely with product managers, designers, and other developers to deliver high-quality software. Participate in code reviews and assist in integrating user-facing elements with server-side logic.',
-                  'Contribute to sprint planning, daily stand-ups, and retrospective meetings. Break down requirements into manageable tasks and ensure timely delivery of features and bug fixes.',
-                ],
-              },
-              {
-                company: {
-                  name: 'Globant',
-                  url: 'https://www.linkedin.com/company/globant/',
-                },
-                dateRange: '2019 - 2024 · 5 yrs',
-                position: 'Full-Stack Developer | .NET & Angular',
-                responsibilities: [
-                  'As a Full-Stack Developer, I actively contributed to the development of 2 large-scale projects for American companies. I designed, built, and maintained front-end code, and developed server-side logic, APIs, and databases.',
-                  'Write clean, maintainable, and well-documented code using best practices. Refactor existing code to enhance performance and readability, and implement automated testing and continuous integration with Azure DevOps.',
-                  'Work closely with product managers, designers, and other developers to deliver high-quality software. Participate in code reviews and assist in integrating user-facing elements with server-side logic.',
-                  'Contribute to sprint planning, daily stand-ups, and retrospective meetings. Break down requirements into manageable tasks and ensure timely delivery of features and bug fixes.',
-                ],
-              },
-              {
-                company: {
-                  name: 'Apps2go Perú',
-                  url: 'https://www.linkedin.com/company/apps2go-per%C3%BA/',
-                },
-                dateRange: '2019 - 2020 · 1 yr',
-                position: 'Full-stack Developer | .NET & Android',
-                responsibilities: [
-                  'As a Full-Stack Developer, I developed a marketplace mobile app and its API for the company owner, based on provided designs and requirements.',
-                ],
-              },
-              {
-                company: {
-                  name: 'KODOTI',
-                  url: 'https://www.linkedin.com/company/kodoti/',
-                },
-                dateRange: '2018 - 2019 · 1 yr',
-                position: 'Frontend Developer | Vue.js',
-                responsibilities: [
-                  'As a Frontend Developer, I developed an e-learning platform website for the company owner, based on provided designs and requirements.',
-                ],
-              },
-              {
-                company: {
-                  name: 'Juntoz',
-                  url: 'https://www.linkedin.com/company/juntoz/',
-                },
-                dateRange: '2017 - 2018 · 1 yr',
-                position: 'Full-Stack Developer Junior | .NET & Angular',
-                responsibilities: [
-                  'As a junior Full-Stack Developer, I assisted in the delivery of 4 projects for retail companies. Contributed to the design and development of front-end components and supported the implementation of server-side logic and APIs.',
-                  'Work with product managers, designers, and senior developers to implement features and fix bugs. Participate in code reviews to learn best practices and improve code quality.',
-                  'Attend sprint planning, daily stand-ups, and retrospective meetings. Break down tasks into manageable pieces and provide status updates on progress.',
-                ],
-              },
-            ];
+      this.headers = this.buildHeaders(this.lang);
+      this.loadContent(this.lang);
     });
   }
 
-  getYearLabel(years: number): string {
-    return years === 1 ? (this.lang === 'ES' ? 'año' : 'yr') : this.lang === 'ES' ? 'años' : 'yrs';
+  setTheme(value: Theme) {
+    this.theme = value;
+    this.syncQuery({ theme: value });
+  }
+  setPhoto(value: Photo) {
+    this.photo = value;
+    this.syncQuery({ photo: value });
+  }
+  setDensity(value: Density) {
+    this.density = value;
+    this.syncQuery({ density: value });
+  }
+  setLang(value: Lang) {
+    this.syncQuery({ lang: value });
+  }
+
+  print() {
+    window.print();
+  }
+
+  private syncQuery(partial: Record<string, string>) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: partial,
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  }
+
+  private buildHeaders(lang: Lang) {
+    const ES = lang === 'ES';
+    return {
+      roleTitle: ES ? 'Desarrollador Full-Stack Senior' : 'Senior Full-Stack Developer',
+      location: ES ? 'Lima, Perú · GMT−5' : 'Lima, Peru · GMT−5',
+      about: ES ? 'Perfil' : 'About',
+      workExperience: ES ? 'Experiencia Laboral' : 'Work Experience',
+      techStack: ES ? 'Stack Tecnológico' : 'Tech Stack',
+      softSkills: ES ? 'Habilidades Blandas' : 'Soft Skills',
+      certifications: ES ? 'Certificaciones' : 'Certifications',
+      education: ES ? 'Educación' : 'Education',
+      languages: ES ? 'Idiomas' : 'Languages',
+      highlightsAria: ES ? 'Destacados' : 'Highlights',
+      themeLabel: ES ? 'Tema' : 'Theme',
+      photoLabel: ES ? 'Foto' : 'Photo',
+      densityLabel: ES ? 'Densidad' : 'Density',
+      themeLight: ES ? 'Claro' : 'Light',
+      themeDark: ES ? 'Oscuro' : 'Dark',
+      photoShow: ES ? 'Mostrar' : 'Show',
+      photoHide: ES ? 'Ocultar' : 'Hide',
+      densityComfortable: ES ? 'Cómoda' : 'Comfortable',
+      densityCompact: ES ? 'Compacta' : 'Compact',
+      printBtn: ES ? 'Imprimir / Guardar PDF' : 'Print / Save PDF',
+      page: ES ? 'Página 1 / 1' : 'Page 1 / 1',
+    };
+  }
+
+  private loadContent(lang: Lang) {
+    const ES = lang === 'ES';
+
+    this.highlights = ES
+      ? [
+          { num: '9', suffix: '+ años', label: 'Experiencia full-stack' },
+          { num: '12', suffix: '+ enviados', label: 'Proyectos en producción' },
+          { num: '3', suffix: ' stacks', label: '.NET · Angular · MEAN' },
+        ]
+      : [
+          { num: '9', suffix: '+ yrs', label: 'Full-stack experience' },
+          { num: '12', suffix: '+ shipped', label: 'Production projects delivered' },
+          { num: '3', suffix: ' stacks', label: '.NET · Angular · MEAN' },
+        ];
+
+    this.about = ES
+      ? 'Desarrollador Full-Stack Senior, <b>9+ años</b> en <b>12+ productos en producción</b> sobre <b>.NET, Angular y el stack MEAN</b>. Llevo features desde un brief ambiguo hasta producción — encargándome de la API, la UI y el pipeline de CI que las despliega. Trabajo remoto nativo, cómodo en comunicación asíncrona, sesgo hacia PRs pequeños y revisables.'
+      : 'Senior Full-Stack Developer, <b>9+ years</b> across <b>12+ shipped products</b> on <b>.NET, Angular and the MEAN stack</b>. I take features from ambiguous brief to production — owning API, UI and the CI pipeline that ships them. Remote-native, async-comfortable, biased toward small reviewable PRs.';
+
+    // NOTE: Bullets contain TODO markers for metrics CD invented.
+    // Replace each TODO with a real number you can defend in an interview,
+    // or remove the metric and keep just the verb-first phrasing.
+    this.roles = ES
+      ? [
+          {
+            yearRange: '2025 — Presente',
+            duration: '1 año · Actual',
+            position: 'Desarrollador Full-Stack',
+            company: { name: 'Nubelity', url: 'https://www.linkedin.com/company/nubelity-llc/' },
+            stack: '.NET · Angular · Banca',
+            responsibilities: [
+              '<b>Diseñé la arquitectura del frontend y la capa de API</b> de una plataforma de gestión de solicitudes para un banco <b>[TODO: Fortune-500 o sector concreto]</b>, entregando el MVP en <b>[TODO: N meses]</b>.',
+              '<b>Estandaricé una biblioteca de componentes compartida</b> entre <b>[TODO: N]</b> módulos, recortando el tiempo de desarrollo de features en <b>~[TODO: %]</b>.',
+              'Lideré el diseño de contratos de API y el modelado de datos para <b>[TODO: N]</b> entidades, en colaboración estrecha con producto.',
+            ],
+          },
+          {
+            yearRange: '2023 — 2025',
+            duration: '2 años',
+            position: 'Desarrollador Full-Stack',
+            company: { name: 'Halo Media', url: 'https://www.linkedin.com/company/halo-media/' },
+            stack: 'MEAN · Azure DevOps · Cliente USA',
+            responsibilities: [
+              '<b>Entregué [TODO: 4] aplicaciones MEAN en producción</b> para un cliente empresarial estadounidense, asumiendo el código desde prototipo hasta release.',
+              '<b>Refactoricé el módulo Angular más lento</b> de la suite — bajé el tiempo de carga de <b>[TODO: Xs] a [TODO: Ys]</b> y reduje el CLS en <b>[TODO: %]</b>.',
+              '<b>Configuré pipelines de Azure DevOps</b> con pruebas automatizadas, pasando al equipo de despliegues manuales semanales a merges bajo demanda.',
+            ],
+          },
+          {
+            yearRange: '2019 — 2024',
+            duration: '5 años',
+            position: 'Desarrollador Full-Stack',
+            company: { name: 'Globant', url: 'https://www.linkedin.com/company/globant/' },
+            stack: '.NET · Angular · Empresas USA',
+            responsibilities: [
+              '<b>Construí y mantuve [TODO: 2] plataformas empresariales</b> (.NET / Angular) usadas por <b>[TODO: Nk]</b> usuarios diarios.',
+              '<b>Migré [TODO: N] microservicios a OAuth2/JWT</b> sin downtime, liberando <b>[TODO: N+]</b> cambios en el primer trimestre.',
+              '<b>Mentoricé a [TODO: N] desarrolladores junior</b> mediante revisiones de código y pair programming, elevando el throughput de merges del equipo en <b>~[TODO: %]</b>.',
+            ],
+          },
+          {
+            yearRange: '2019 — 2020',
+            duration: '1 año · Único ingeniero',
+            position: 'Desarrollador Full-Stack',
+            company: { name: 'Apps2go Perú', url: 'https://www.linkedin.com/company/apps2go-per%C3%BA/' },
+            stack: '.NET · Android · Único ingeniero',
+            responsibilities: [
+              '<b>Entregué de extremo a extremo una app Android de marketplace y su API en .NET</b> como único ingeniero, alcanzando <b>[TODO: N]</b> instalaciones en el primer trimestre.',
+            ],
+          },
+          {
+            yearRange: '2018 — 2019',
+            duration: '1 año',
+            position: 'Desarrollador Frontend',
+            company: { name: 'Kodoti', url: 'https://www.linkedin.com/company/kodoti/' },
+            stack: 'Vue.js · E-learning',
+            responsibilities: [
+              '<b>Construí el sitio público de e-learning en Vue.js</b> desde los diseños hasta el lanzamiento, dando soporte a <b>[TODO: N]</b> landing pages de cursos con componentes compartidos.',
+            ],
+          },
+          {
+            yearRange: '2017 — 2018',
+            duration: '1 año · Junior',
+            position: 'Desarrollador Full-Stack Jr',
+            company: { name: 'Juntoz', url: 'https://www.linkedin.com/company/juntoz/' },
+            stack: '.NET · Angular · Retail',
+            responsibilities: [
+              '<b>Contribuí a [TODO: 4] releases de e-commerce retail</b> como dev junior .NET/Angular — corregí <b>[TODO: N+]</b> bugs y entregué <b>[TODO: N+]</b> pequeñas features.',
+            ],
+          },
+        ]
+      : [
+          {
+            yearRange: '2025 — Present',
+            duration: '1 yr · Current',
+            position: 'Full-Stack Developer',
+            company: { name: 'Nubelity', url: 'https://www.linkedin.com/company/nubelity-llc/' },
+            stack: '.NET · Angular · Banking',
+            responsibilities: [
+              '<b>Architected the frontend and API layer</b> of a request-management platform for a <b>[TODO: Fortune-500 / specific sector]</b> bank, shipping the MVP in <b>[TODO: N months]</b>.',
+              '<b>Standardized a shared component library</b> across <b>[TODO: N]</b> modules, cutting feature-build time by <b>~[TODO: %]</b>.',
+              'Owned API contract design and data modeling for <b>[TODO: N]</b> entities, paired with product to keep scope crisp.',
+            ],
+          },
+          {
+            yearRange: '2023 — 2025',
+            duration: '2 yrs',
+            position: 'Full-Stack Developer',
+            company: { name: 'Halo Media', url: 'https://www.linkedin.com/company/halo-media/' },
+            stack: 'MEAN · Azure DevOps · US client',
+            responsibilities: [
+              '<b>Delivered [TODO: 4] production MEAN-stack applications</b> for a US enterprise client, owning code from prototype to release.',
+              '<b>Refactored the slowest Angular module</b> in the suite — cut average page load from <b>[TODO: Xs] to [TODO: Ys]</b> and dropped Lighthouse CLS by <b>[TODO: %]</b>.',
+              '<b>Set up Azure DevOps pipelines</b> with automated tests, moving the team from weekly manual deploys to on-demand merges.',
+            ],
+          },
+          {
+            yearRange: '2019 — 2024',
+            duration: '5 yrs',
+            position: 'Full-Stack Developer',
+            company: { name: 'Globant', url: 'https://www.linkedin.com/company/globant/' },
+            stack: '.NET · Angular · US enterprise',
+            responsibilities: [
+              '<b>Built and maintained [TODO: 2] enterprise platforms</b> (.NET / Angular) used by <b>[TODO: Nk]</b> daily users.',
+              '<b>Migrated [TODO: N] microservices to OAuth2/JWT</b> with zero downtime, releasing <b>[TODO: N+]</b> changes in the first quarter.',
+              '<b>Mentored [TODO: N] junior developers</b> through code reviews and pairing, raising team merge throughput by <b>~[TODO: %]</b>.',
+            ],
+          },
+          {
+            yearRange: '2019 — 2020',
+            duration: '1 yr · Sole engineer',
+            position: 'Full-Stack Developer',
+            company: { name: 'Apps2go Perú', url: 'https://www.linkedin.com/company/apps2go-per%C3%BA/' },
+            stack: '.NET · Android · Sole engineer',
+            responsibilities: [
+              '<b>Shipped a marketplace Android app and .NET API end-to-end</b> as sole engineer, reaching <b>[TODO: N]</b> installs in the first quarter.',
+            ],
+          },
+          {
+            yearRange: '2018 — 2019',
+            duration: '1 yr',
+            position: 'Frontend Developer',
+            company: { name: 'Kodoti', url: 'https://www.linkedin.com/company/kodoti/' },
+            stack: 'Vue.js · E-learning',
+            responsibilities: [
+              '<b>Built the public e-learning site in Vue.js</b> from designs to launch, supporting <b>[TODO: N]</b> course landing pages with shared components.',
+            ],
+          },
+          {
+            yearRange: '2017 — 2018',
+            duration: '1 yr · Junior',
+            position: 'Full-Stack Developer Jr',
+            company: { name: 'Juntoz', url: 'https://www.linkedin.com/company/juntoz/' },
+            stack: '.NET · Angular · Retail',
+            responsibilities: [
+              '<b>Contributed to [TODO: 4] retail e-commerce releases</b> as a junior .NET/Angular dev — fixed <b>[TODO: N+]</b> bugs and shipped <b>[TODO: N+]</b> small features.',
+            ],
+          },
+        ];
+
+    this.techGroups = ES
+      ? [
+          {
+            label: 'Experto',
+            yearsLabel: '5+ años',
+            skills: [
+              { name: '.NET', lead: true },
+              { name: 'Angular', lead: true },
+              { name: 'C#' },
+              { name: 'TypeScript' },
+              { name: 'JavaScript' },
+              { name: 'Node.js' },
+              { name: 'SQL' },
+              { name: 'DevOps' },
+              { name: 'Git' },
+            ],
+          },
+          {
+            label: 'Competente',
+            yearsLabel: '2 – 5 años',
+            skills: [{ name: 'Docker' }, { name: 'MongoDB' }, { name: 'Python' }, { name: 'React' }],
+          },
+          {
+            label: 'Familiar',
+            yearsLabel: '< 2 años',
+            skills: [{ name: 'AWS' }],
+          },
+        ]
+      : [
+          {
+            label: 'Expert',
+            yearsLabel: '5+ yrs',
+            skills: [
+              { name: '.NET', lead: true },
+              { name: 'Angular', lead: true },
+              { name: 'C#' },
+              { name: 'TypeScript' },
+              { name: 'JavaScript' },
+              { name: 'Node.js' },
+              { name: 'SQL' },
+              { name: 'DevOps' },
+              { name: 'Git' },
+            ],
+          },
+          {
+            label: 'Proficient',
+            yearsLabel: '2 – 5 yrs',
+            skills: [{ name: 'Docker' }, { name: 'MongoDB' }, { name: 'Python' }, { name: 'React' }],
+          },
+          {
+            label: 'Familiar',
+            yearsLabel: '< 2 yrs',
+            skills: [{ name: 'AWS' }],
+          },
+        ];
+
+    this.softSkills = ES
+      ? ['Resolución de problemas', 'Colaboración', 'Comunicación clara', 'Aprendizaje continuo', 'Adaptabilidad', 'Gestión del tiempo', 'Liderazgo', 'Fiabilidad']
+      : ['Problem-solving', 'Collaboration', 'Clear communication', 'Continuous learning', 'Adaptability', 'Time management', 'Leadership', 'Reliability'];
+
+    this.certifications = [
+      { tech: 'Angular', url: 'https://www.udemy.com/certificate/UC-0c2da545-7a78-4d99-a127-c2aa86f98e3f/' },
+      { tech: 'Node.js', url: 'https://www.udemy.com/certificate/UC-bff821ee-301a-463f-ad72-9639ee2888fe/' },
+      { tech: '.NET', url: 'https://www.udemy.com/certificate/UC-ccccb339-13da-4cf8-91e0-92e95bdd64d9/' },
+      { tech: 'Django', url: 'https://www.udemy.com/certificate/UC-f7caccc8-d888-423d-9a59-46441f690b2b/' },
+      { tech: 'MySQL', url: 'https://www.udemy.com/certificate/UC-2f5e5be2-3395-4b05-ac53-fd3e708ba5ad/' },
+      { tech: 'MongoDB', url: 'https://www.udemy.com/certificate/UC-2f5e5be2-3395-4b05-ac53-fd3e708ba5ad/' },
+      { tech: 'DevOps', url: 'https://www.udemy.com/certificate/UC-d43b3357-bdc2-4792-b32c-f38a31059e1f/' },
+    ];
+
+    this.education = ES
+      ? [{ degree: 'Bachiller en Ingeniería Informática', school: 'Universidad de Lima', dateRange: '2014 — 2020' }]
+      : [{ degree: 'B.S. Informatics Engineering', school: 'University of Lima', dateRange: '2014 — 2020' }];
+
+    this.spokenLanguages = ES
+      ? [
+          { language: 'Español', proficiency: 'Nativo' },
+          { language: 'Inglés', proficiency: 'Fluido · C1' },
+        ]
+      : [
+          { language: 'Spanish', proficiency: 'Native' },
+          { language: 'English', proficiency: 'Fluent · C1' },
+        ];
   }
 }

@@ -29,7 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles/risen.css", "src/styles.scss"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -42,8 +42,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "16kB"
                 }
               ],
               "outputHashing": "all"
@@ -83,7 +83,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles/risen.css", "src/styles.scss"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         }
