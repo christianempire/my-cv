@@ -29,13 +29,8 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "styles": ["src/styles/risen.css", "src/styles.scss"],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -88,7 +83,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles/risen.css", "src/styles.scss"],
             "scripts": []
           }
         }
