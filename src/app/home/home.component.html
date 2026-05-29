@@ -1,5 +1,5 @@
 <main class="page" data-screen-label="CV">
-  <section class="controls" role="toolbar" aria-label="CV controls">
+  <section class="controls" role="toolbar" aria-label="CV controls" *ngIf="isDev">
     <span class="label">{{ headers.themeLabel }}</span>
     <div class="group">
       <button type="button" [class.on]="theme === 'light'" (click)="setTheme('light')">{{ headers.themeLight }}</button>
@@ -12,24 +12,14 @@
       <button type="button" [class.on]="photo === 'off'" (click)="setPhoto('off')">{{ headers.photoHide }}</button>
     </div>
 
-    <span class="label">{{ headers.densityLabel }}</span>
-    <div class="group">
-      <button type="button" [class.on]="density === 'comfortable'" (click)="setDensity('comfortable')">{{ headers.densityComfortable }}</button>
-      <button type="button" [class.on]="density === 'compact'" (click)="setDensity('compact')">{{ headers.densityCompact }}</button>
-    </div>
-
     <span class="label">Lang</span>
     <div class="group">
       <button type="button" [class.on]="lang === 'EN'" (click)="setLang('EN')">EN</button>
       <button type="button" [class.on]="lang === 'ES'" (click)="setLang('ES')">ES</button>
     </div>
-
-    <span class="spacer"></span>
-    <button class="print-btn" type="button" (click)="print()">⌘P · {{ headers.printBtn }}</button>
   </section>
 
-  <div class="full-stage">
-    <article class="cv" [attr.data-theme]="theme" [attr.data-photo]="photo" [attr.data-density]="density" [attr.aria-label]="name + ' CV'">
+  <article class="cv" [attr.data-theme]="theme" [attr.data-photo]="photo" [attr.aria-label]="name + ' CV'">
       <header class="cv-head">
         <div class="id">
           <h1 class="cv-name">{{ name }}</h1>
@@ -74,6 +64,7 @@
               <span>{{ headers.location }}</span>
             </li>
           </ul>
+          <p class="cv-availability">{{ headers.availability }}</p>
         </div>
         <div class="cv-photo" aria-hidden="true">
           <img src="images/profile.png" alt="" />
@@ -110,11 +101,23 @@
                     </span>
                   </h4>
                   <p class="stack">{{ role.stack }}</p>
+                  <p class="role-note" *ngIf="role.note">{{ role.note }}</p>
                   <ul>
                     <li *ngFor="let r of role.responsibilities" [innerHTML]="r"></li>
                   </ul>
                 </div>
               </div>
+            </div>
+          </section>
+
+          <section class="cv-sec">
+            <h3>{{ headers.selectedProjects }}</h3>
+            <div class="projects">
+              <article class="project" *ngFor="let p of projects">
+                <h4>{{ p.name }} <span class="tech">· {{ p.tech }}</span></h4>
+                <p class="desc">{{ p.description }}</p>
+                <a class="link" [href]="p.url" target="_blank" rel="noopener">{{ p.urlLabel }}</a>
+              </article>
             </div>
           </section>
         </div>
@@ -128,6 +131,9 @@
                 <span *ngFor="let s of g.skills" class="skill" [class.lead]="s.lead">{{ s.name }}</span>
               </div>
             </div>
+            <p class="also-exp">
+              <span class="also-exp-label">{{ headers.alsoExp }}:</span> {{ alsoExperiencedWith }}
+            </p>
           </section>
 
           <section class="cv-sec">
@@ -141,7 +147,7 @@
             <h3>{{ headers.certifications }}</h3>
             <div class="certs">
               <a *ngFor="let c of certifications" [href]="c.url" target="_blank" rel="noopener" class="cert">
-                {{ c.tech }}<span class="y" *ngIf="c.year">{{ c.year }}</span>
+                {{ c.tech }}<span class="y" *ngIf="c.date"> · {{ c.date }}</span>
               </a>
             </div>
           </section>
@@ -152,6 +158,7 @@
               <p class="deg">{{ e.degree }}</p>
               <p class="school">{{ e.school }}</p>
               <span class="when">{{ e.dateRange }}</span>
+              <p class="edu-note" *ngIf="e.note">{{ e.note }}</p>
             </ng-container>
           </section>
 
@@ -167,9 +174,8 @@
       </div>
 
       <footer class="cv-foot">
-        <span>{{ name }} · CV · 2026</span>
-        <span>{{ headers.page }}</span>
+        <span>{{ name }} · CV · {{ updatedLabel }}</span>
+        <span>{{ contact.email }}</span>
       </footer>
     </article>
-  </div>
 </main>

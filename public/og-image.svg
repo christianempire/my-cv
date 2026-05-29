@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <style>
+      .bg { fill: #111315; }
+      .accent { fill: oklch(0.78 0.13 250); }
+      .accent-deep { fill: oklch(0.46 0.18 257); }
+      .ink { fill: #f1ede4; }
+      .ink-soft { fill: #d6d2c8; }
+      .muted { fill: #8b8a85; }
+      .rule { stroke: #2a2c2e; stroke-width: 1.5; }
+      .serif { font-family: 'Source Serif 4', 'Iowan Old Style', Georgia, serif; }
+      .sans  { font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+      .mono  { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="1200" height="630"/>
+
+  <!-- Accent bar left -->
+  <rect class="accent" x="0" y="0" width="6" height="630"/>
+
+  <!-- Name -->
+  <text class="serif ink" x="80" y="180" font-weight="500" font-size="100" letter-spacing="-2">Christian Changa</text>
+
+  <!-- Role (mono uppercase) -->
+  <text class="mono accent" x="84" y="232" font-weight="500" font-size="22" letter-spacing="5">SENIOR FULL-STACK DEVELOPER</text>
+
+  <!-- Rule line under header -->
+  <line class="rule" x1="80" y1="290" x2="1120" y2="290"/>
+
+  <!-- Highlights row -->
+  <g transform="translate(80, 360)">
+    <!-- 9+ years -->
+    <text class="serif ink" x="0" y="0" font-weight="500" font-size="76" letter-spacing="-1">9</text>
+    <text class="mono accent" x="78" y="0" font-weight="500" font-size="24" letter-spacing="1">+ YRS</text>
+    <text class="mono muted" x="0" y="36" font-size="16" letter-spacing="2">FULL-STACK</text>
+
+    <!-- divider -->
+    <line class="rule" x1="320" y1="-58" x2="320" y2="50"/>
+
+    <!-- 13 shipped -->
+    <text class="serif ink" x="360" y="0" font-weight="500" font-size="76" letter-spacing="-1">13</text>
+    <text class="mono accent" x="468" y="0" font-weight="500" font-size="24" letter-spacing="1">SHIPPED</text>
+    <text class="mono muted" x="360" y="36" font-size="16" letter-spacing="2">PRODUCTS</text>
+
+    <!-- divider -->
+    <line class="rule" x1="720" y1="-58" x2="720" y2="50"/>
+
+    <!-- 6 industries -->
+    <text class="serif ink" x="760" y="0" font-weight="500" font-size="76" letter-spacing="-1">6</text>
+    <text class="mono accent" x="808" y="0" font-weight="500" font-size="24" letter-spacing="1">INDUSTRIES</text>
+    <text class="mono muted" x="760" y="36" font-size="16" letter-spacing="2">SPANNED</text>
+  </g>
+
+  <!-- Tagline -->
+  <text class="sans ink-soft" x="80" y="510" font-size="26" font-weight="400">.NET · Angular · MEAN · 9 years building production systems for US clients</text>
+
+  <!-- Footer -->
+  <text class="mono muted" x="80" y="580" font-size="16" letter-spacing="2">LIMA, PERU · GMT−5 · OPEN TO REMOTE</text>
+
+  <!-- Branded "cc" badge bottom right -->
+  <g transform="translate(1080, 510)">
+    <rect class="accent-deep" width="60" height="60" rx="10"/>
+    <text class="serif" x="30" y="42" font-weight="600" font-size="34" fill="#fbfaf6" text-anchor="middle" letter-spacing="-1">cc</text>
+    <rect x="6" y="51" width="48" height="2" fill="#fbfaf6" opacity="0.5"/>
+  </g>
+</svg>

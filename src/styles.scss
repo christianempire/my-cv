@@ -34,12 +34,19 @@ a {
 }
 
 /* ============================================================
-   PAGE WRAPPER (toolbar + stage)
+   PAGE WRAPPER — also the visual stage that holds the .cv.
+   Background, padding and flex-center logic that used to live
+   on .full-stage are now here so there is no extra wrapper div.
 ============================================================ */
 .page {
-  max-width: 1280px;
-  margin: 0 auto;
+  margin: 0;
   padding: 32px 24px 64px;
+  background: #e8e4d8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  min-height: 100vh;
 }
 
 /* ============================================================
@@ -113,15 +120,6 @@ a {
   }
 }
 
-.full-stage {
-  display: flex;
-  justify-content: center;
-  padding: 32px;
-  background: #e8e4d8;
-  border-radius: 2px;
-  overflow: auto;
-}
-
 /* ============================================================
    THE CV ITSELF
 ============================================================ */
@@ -139,8 +137,11 @@ a {
   --chip-ink: #2b2c2f;
   --photo-bg: #ece9df;
 
-  width: 816px;
-  min-height: 1056px;
+  /* A4-targeted authoring size — at PDF scale 0.86 this lands at
+     exactly 794×1123 device px (A4 in CSS px at 96 dpi). Tune both
+     values together if you change PDF scale. */
+  width: 920px;
+  min-height: 1306px;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
@@ -170,25 +171,6 @@ a {
 
 .cv[data-theme='dark'] .cv-name {
   color: #fff;
-}
-
-.cv[data-density='compact'] {
-  font-size: 10.2pt;
-  line-height: 1.38;
-}
-.cv[data-density='compact'] .cv-head {
-  padding: 36px 56px 18px;
-}
-.cv[data-density='compact'] .cv-body .cv-main,
-.cv[data-density='compact'] .cv-body .cv-side {
-  padding-top: 20px;
-  padding-bottom: 22px;
-}
-.cv[data-density='compact'] .tl {
-  gap: 14px;
-}
-.cv[data-density='compact'] .role h4 {
-  font-size: 11.5pt;
 }
 
 /* Header */
@@ -264,6 +246,21 @@ a {
     flex: none;
     opacity: 0.7;
   }
+}
+
+.cv-availability {
+  margin: 12px 0 0;
+  font-family: var(--mono);
+  font-size: 8.5pt;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  color: var(--accent-ink);
+  padding: 6px 10px;
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--accent);
+  background: var(--rule-soft);
+  display: inline-block;
+  border-radius: 2px;
 }
 
 .cv-photo {
@@ -402,7 +399,6 @@ a {
   line-height: 1.55;
   color: var(--ink-soft);
   margin: 0;
-  max-width: 62ch;
   text-wrap: pretty;
 
   b {
@@ -517,6 +513,14 @@ a {
     margin: 2px 0 8px;
   }
 
+  .role-note {
+    font-size: 9pt;
+    font-style: italic;
+    color: var(--muted);
+    margin: 0 0 8px;
+    line-height: 1.45;
+  }
+
   ul {
     margin: 0;
     padding: 0;
@@ -545,6 +549,72 @@ a {
     b {
       font-weight: 600;
       color: var(--ink);
+    }
+  }
+}
+
+/* Projects */
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.project {
+  position: relative;
+  padding-left: 18px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--accent);
+  }
+
+  h4 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 11.5pt;
+    margin: 0 0 2px;
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+    color: var(--ink);
+
+    .tech {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 8pt;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-left: 4px;
+    }
+  }
+
+  .desc {
+    font-size: 9.8pt;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 2px 0 4px;
+    text-wrap: pretty;
+  }
+
+  .link {
+    font-family: var(--mono);
+    font-size: 8.5pt;
+    letter-spacing: 0.04em;
+    color: var(--accent-ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+
+    &:hover {
+      border-bottom-color: var(--accent);
     }
   }
 }
@@ -594,6 +664,22 @@ a {
     border-color: var(--accent);
     background: transparent;
     color: var(--accent-ink);
+  }
+}
+
+.also-exp {
+  margin: 12px 0 0;
+  font-size: 9pt;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+
+  .also-exp-label {
+    font-family: var(--mono);
+    font-size: 8pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 }
 
@@ -677,6 +763,14 @@ a {
     margin-top: 3px;
     display: block;
   }
+
+  .edu-note {
+    margin: 6px 0 0;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    color: var(--muted);
+    font-style: italic;
+  }
 }
 
 .langs {
@@ -719,57 +813,11 @@ a {
   text-transform: uppercase;
   color: var(--muted);
   border-top: 1px solid var(--rule);
-}
-
-/* ============================================================
-   PRINT
-============================================================ */
-@media print {
-  @page {
-    size: Letter;
-    margin: 0;
-  }
-
-  body {
-    background: #fff;
-  }
-
-  .page {
-    padding: 0;
-    max-width: none;
-  }
-
-  .controls {
-    display: none !important;
-  }
-
-  .full-stage {
-    background: #fff;
-    padding: 0;
-    overflow: visible;
-  }
-
-  .cv {
-    width: 8.5in;
-    min-height: 11in;
-    height: 11in;
-    box-shadow: none !important;
-    border: 0 !important;
-    --paper: #fff;
-    --ink: #000;
-    --ink-soft: #222;
-    --muted: #555;
-    --rule: #cfcfcf;
-    --rule-soft: #f5f5f1;
-    --chip-bg: #fff;
-    --chip-ink: #000;
-    --accent: #1d3a8a;
-    --accent-ink: #1d3a8a;
-  }
-
-  .cv-side {
-    background: #fafaf7;
-  }
+  /* .cv is display: flex; flex-direction: column — auto margin
+     pushes the footer to the very bottom of the (min-height) page
+     when content is shorter than the page, so both column
+     backgrounds reach the foot line cleanly. */
+  margin-top: auto;
 }
 
 /* ============================================================
@@ -778,10 +826,6 @@ a {
 @media (max-width: 900px) {
   .page {
     padding: 16px 8px 32px;
-  }
-
-  .full-stage {
-    padding: 16px 8px;
     overflow-x: auto;
   }
 }
