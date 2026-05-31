@@ -136,7 +136,7 @@ export class HomeComponent {
   private buildHeaders(lang: Lang) {
     const ES = lang === 'ES';
     return {
-      roleTitle: ES ? 'Desarrollador Full-Stack Senior' : 'Senior Full-Stack Developer',
+      roleTitle: ES ? 'Desarrollador Full-Stack Senior · .NET & Angular' : 'Senior Full-Stack Developer · .NET & Angular',
       location: ES ? 'Lima, Perú · GMT−5' : 'Lima, Peru · GMT−5',
       availability: ES
         ? 'Abierto a remoto (LATAM / zonas horarias USA) · Contrato o tiempo completo'
