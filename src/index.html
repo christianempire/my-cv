@@ -4,7 +4,12 @@
     <meta charset="utf-8" />
     <title>Christian Changa — Senior Full-Stack Developer</title>
     <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Fixed layout-viewport width = .cv (920px) + .page padding (24px × 2).
+         The CV is a fixed-width 920px design; using device-width would force
+         the layout viewport to the phone's physical width, overflowing the
+         content and blocking zoom-out. Pinning it to the real rendered width
+         lets mobile browsers scale the whole page to fit, then pinch-zoom in. -->
+    <meta name="viewport" content="width=968" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
     <meta
