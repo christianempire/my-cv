@@ -362,6 +362,13 @@ export class HomeComponent {
             urlLabel: 'github.com/christianempire/my-cv',
           },
           {
+            name: 'Longshot',
+            tech: 'TypeScript · Chrome & Firefox (MV3) · Vite',
+            description: 'Extensión que arma capturas de pantalla largas desplazando y uniendo fotogramas: página completa o cualquier elemento con scroll, incluso contenedores más altos que el viewport.',
+            url: 'https://github.com/christianempire/longshot',
+            urlLabel: 'github.com/christianempire/longshot',
+          },
+          {
             name: 'PingPulse',
             tech: 'Electron · React · TypeScript · Tailwind · Zustand',
             description: 'App de escritorio que monitorea la salud de la conexión a internet en tiempo real: latencia, pérdida de paquetes, umbrales auto-calibrados y overlay siempre visible.',
@@ -383,6 +390,13 @@ export class HomeComponent {
             description: 'Bilingual single-page CV with light/dark themes, query-string controls, and a print-optimized stylesheet.',
             url: 'https://github.com/christianempire/my-cv',
             urlLabel: 'github.com/christianempire/my-cv',
+          },
+          {
+            name: 'Longshot',
+            tech: 'TypeScript · Chrome & Firefox (MV3) · Vite',
+            description: 'Extension that builds long screenshots by scroll-and-stitch — the full page, or any scrollable element, including containers taller than the viewport.',
+            url: 'https://github.com/christianempire/longshot',
+            urlLabel: 'github.com/christianempire/longshot',
           },
           {
             name: 'PingPulse',
