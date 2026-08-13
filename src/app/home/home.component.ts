@@ -139,8 +139,8 @@ export class HomeComponent {
       roleTitle: ES ? 'Desarrollador Full-Stack Senior · .NET & Angular' : 'Senior Full-Stack Developer · .NET & Angular',
       location: ES ? 'Lima, Perú · GMT−5' : 'Lima, Peru · GMT−5',
       availability: ES
-        ? 'Abierto a remoto (LATAM / zonas horarias USA) · Contrato o tiempo completo'
-        : 'Open to remote (LATAM / US timezones) · Contract or full-time',
+        ? '100% remoto (LATAM / zonas horarias USA) · Contrato o tiempo completo'
+        : '100% remote (LATAM / US timezones) · Contract or full-time',
       about: ES ? 'Perfil' : 'About',
       workExperience: ES ? 'Experiencia Laboral' : 'Work Experience',
       selectedProjects: ES ? 'Proyectos Destacados' : 'Selected Projects',
@@ -213,7 +213,7 @@ export class HomeComponent {
         responsibilities: [
           '<b>Architected the frontend and API layer</b> of a request-management platform for a <b>multinational banking institution</b>, shipping the MVP in <b>5 months</b>.',
           '<b>Standardized a shared component library</b> across <b>4 modules</b>, cutting feature-build time by <b>~35%</b> and onboarding new devs in under a week.',
-          'Owned API contract design and data modeling for <b>18 entities</b>, paired with product to keep scope crisp.',
+          'Owned <b>REST API contract design</b> and data modeling for <b>18 entities</b>, paired with product to keep scope crisp.',
         ],
       },
       {
@@ -225,8 +225,8 @@ export class HomeComponent {
         note: 'Moonlighted 2023 – 2024 while finishing at Globant.',
         responsibilities: [
           '<b>Delivered 4 production MEAN-stack applications</b> for a US enterprise client in the marketing / MarTech space, owning code from prototype to release.',
-          '<b>Refactored the slowest Angular module</b> in the suite — cut average page load from <b>3.8s to 1.4s</b> and dropped Lighthouse CLS by <b>~55%</b>.',
-          '<b>Set up Azure DevOps pipelines</b> with automated tests and continuous integration, moving the team from weekly manual deploys to on-demand merges.',
+          '<b>Optimized Core Web Vitals</b> on the slowest Angular module in the suite — cut average page load from <b>3.8s to 1.4s</b> and dropped <b>CLS</b> by <b>~55%</b>.',
+          '<b>Set up Azure DevOps CI/CD pipelines</b> with automated tests and continuous integration, moving the team from weekly manual deploys to on-demand merges.',
         ],
       },
       {
@@ -287,7 +287,7 @@ export class HomeComponent {
         responsibilities: [
           '<b>Diseñé la arquitectura del frontend y la capa de API</b> de una plataforma de gestión de solicitudes para una <b>institución bancaria multinacional</b>, entregando el MVP en <b>5 meses</b>.',
           '<b>Estandaricé una biblioteca de componentes compartida</b> entre <b>4 módulos</b>, recortando el tiempo de desarrollo de features en <b>~35%</b> y reduciendo el onboarding de nuevos devs a menos de una semana.',
-          'Lideré el diseño de contratos de API y el modelado de datos para <b>18 entidades</b>, en colaboración estrecha con producto para mantener el alcance acotado.',
+          'Lideré el <b>diseño de contratos de API REST</b> y el modelado de datos para <b>18 entidades</b>, en colaboración estrecha con producto para mantener el alcance acotado.',
         ],
       },
       {
@@ -299,8 +299,8 @@ export class HomeComponent {
         note: 'Trabajo paralelo (moonlight) 2023 – 2024 mientras cerraba mi etapa en Globant.',
         responsibilities: [
           '<b>Entregué 4 aplicaciones MEAN en producción</b> para un cliente empresarial estadounidense del sector marketing/MarTech, asumiendo el código desde prototipo hasta release.',
-          '<b>Refactoricé el módulo Angular más lento</b> de la suite — bajé el tiempo de carga de <b>3.8s a 1.4s</b> y reduje el Lighthouse CLS en <b>~55%</b>.',
-          '<b>Configuré pipelines de Azure DevOps</b> con pruebas automatizadas e integración continua, pasando al equipo de despliegues manuales semanales a merges bajo demanda.',
+          '<b>Optimicé Core Web Vitals</b> en el módulo Angular más lento de la suite — bajé el tiempo de carga de <b>3.8s a 1.4s</b> y reduje el <b>CLS</b> en <b>~55%</b>.',
+          '<b>Configuré pipelines CI/CD en Azure DevOps</b> con pruebas automatizadas e integración continua, pasando al equipo de despliegues manuales semanales a merges bajo demanda.',
         ],
       },
       {
@@ -412,6 +412,7 @@ export class HomeComponent {
               { name: 'TypeScript' },
               { name: 'JavaScript' },
               { name: 'Node.js' },
+              { name: 'REST APIs' },
               { name: 'SQL' },
               { name: 'Azure DevOps' },
               { name: 'Git' },
@@ -425,7 +426,7 @@ export class HomeComponent {
           {
             label: 'Familiar',
             yearsLabel: '< 2 años',
-            skills: [{ name: 'AWS' }],
+            skills: [{ name: 'Vue.js' }, { name: 'AWS' }],
           },
         ]
       : [
@@ -439,6 +440,7 @@ export class HomeComponent {
               { name: 'TypeScript' },
               { name: 'JavaScript' },
               { name: 'Node.js' },
+              { name: 'REST APIs' },
               { name: 'SQL' },
               { name: 'Azure DevOps' },
               { name: 'Git' },
@@ -452,13 +454,13 @@ export class HomeComponent {
           {
             label: 'Familiar',
             yearsLabel: '< 2 yrs',
-            skills: [{ name: 'AWS' }],
+            skills: [{ name: 'Vue.js' }, { name: 'AWS' }],
           },
         ];
 
     this.alsoExperiencedWith = ES
-      ? 'REST APIs · ASP.NET Core · Entity Framework · LINQ · RxJS · HTML5 · CSS3 · SCSS · Diseño responsivo · Pruebas unitarias · Ágil / Scrum · JIRA · CI/CD · Microservicios · Swagger / OpenAPI · Express.js · SQL Server · Postman'
-      : 'REST APIs · ASP.NET Core · Entity Framework · LINQ · RxJS · HTML5 · CSS3 · SCSS · Responsive design · Unit testing · Agile / Scrum · JIRA · CI/CD · Microservices · Swagger / OpenAPI · Express.js · SQL Server · Postman';
+      ? 'ASP.NET Core · Entity Framework · LINQ · RxJS · Angular Material · HTML5 · CSS3 · SASS / SCSS · Tailwind CSS · Diseño responsivo · Pruebas unitarias · Ágil / Scrum · JIRA · CI/CD · GitHub Actions · Microservicios · Swagger / OpenAPI · Express.js · SQL Server · Postman'
+      : 'ASP.NET Core · Entity Framework · LINQ · RxJS · Angular Material · HTML5 · CSS3 · SASS / SCSS · Tailwind CSS · Responsive design · Unit testing · Agile / Scrum · JIRA · CI/CD · GitHub Actions · Microservices · Swagger / OpenAPI · Express.js · SQL Server · Postman';
 
     this.softSkills = ES
       ? ['Resolución de problemas', 'Comunicación asíncrona clara', 'Revisión de código y mentoría', 'Aprendizaje continuo', 'Colaboración multifuncional']
