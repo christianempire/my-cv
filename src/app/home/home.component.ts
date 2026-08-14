@@ -420,14 +420,14 @@ export class HomeComponent {
             label: 'Experto',
             yearsLabel: '5+ años',
             skills: [
-              { name: '.NET', lead: true },
+              { name: '.NET / .NET Core', lead: true },
               { name: 'Angular', lead: true },
               { name: 'C#' },
               { name: 'TypeScript' },
               { name: 'JavaScript' },
               { name: 'Node.js' },
               { name: 'REST APIs' },
-              { name: 'SQL' },
+              { name: 'SQL / SQL Server' },
               { name: 'Azure DevOps' },
               { name: 'Git' },
             ],
@@ -440,7 +440,7 @@ export class HomeComponent {
           {
             label: 'Familiar',
             yearsLabel: '< 2 años',
-            skills: [{ name: 'Vue.js' }, { name: 'AWS' }],
+            skills: [{ name: 'Vue.js' }, { name: 'Azure' }, { name: 'AWS' }],
           },
         ]
       : [
@@ -448,14 +448,14 @@ export class HomeComponent {
             label: 'Expert',
             yearsLabel: '5+ yrs',
             skills: [
-              { name: '.NET', lead: true },
+              { name: '.NET / .NET Core', lead: true },
               { name: 'Angular', lead: true },
               { name: 'C#' },
               { name: 'TypeScript' },
               { name: 'JavaScript' },
               { name: 'Node.js' },
               { name: 'REST APIs' },
-              { name: 'SQL' },
+              { name: 'SQL / SQL Server' },
               { name: 'Azure DevOps' },
               { name: 'Git' },
             ],
@@ -468,13 +468,13 @@ export class HomeComponent {
           {
             label: 'Familiar',
             yearsLabel: '< 2 yrs',
-            skills: [{ name: 'Vue.js' }, { name: 'AWS' }],
+            skills: [{ name: 'Vue.js' }, { name: 'Azure' }, { name: 'AWS' }],
           },
         ];
 
     this.alsoExperiencedWith = ES
-      ? 'ASP.NET Core · Entity Framework · LINQ · RxJS · Angular Material · HTML5 · CSS3 · SASS / SCSS · Tailwind CSS · Diseño responsivo · Pruebas unitarias · Ágil / Scrum · JIRA · CI/CD · GitHub Actions · Microservicios · Swagger / OpenAPI · Express.js · SQL Server · Postman'
-      : 'ASP.NET Core · Entity Framework · LINQ · RxJS · Angular Material · HTML5 · CSS3 · SASS / SCSS · Tailwind CSS · Responsive design · Unit testing · Agile / Scrum · JIRA · CI/CD · GitHub Actions · Microservices · Swagger / OpenAPI · Express.js · SQL Server · Postman';
+      ? 'ASP.NET Core · Entity Framework · LINQ · RxJS · Angular Material · HTML5 · CSS3 · SASS / SCSS · Tailwind CSS · Diseño responsivo · Pruebas unitarias y de integración · Ágil / Scrum · JIRA · CI/CD · GitHub Actions · Microservicios · Swagger / OpenAPI · Express.js · Procedimientos almacenados · Optimización de consultas · Postman'
+      : 'ASP.NET Core · Entity Framework · LINQ · RxJS · Angular Material · HTML5 · CSS3 · SASS / SCSS · Tailwind CSS · Responsive design · Unit & integration testing · Agile / Scrum · JIRA · CI/CD · GitHub Actions · Microservices · Swagger / OpenAPI · Express.js · Stored procedures · Query optimization · Postman';
 
     this.softSkills = ES
       ? ['Resolución de problemas', 'Comunicación asíncrona clara', 'Revisión de código y mentoría', 'Aprendizaje continuo', 'Colaboración multifuncional']
