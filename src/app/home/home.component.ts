@@ -355,6 +355,13 @@ export class HomeComponent {
     this.projects = ES
       ? [
           {
+            name: 'Strata',
+            tech: '.NET 9 · C# · Angular 19 · SQLite · Win32 P/Invoke',
+            description: 'Herramienta de uso de disco para Windows que responde qué creció, cuándo y dónde: escaneo incremental sobre el journal de cambios de NTFS, motor de diffs sobre historial en SQLite y una UI Angular alojada en el mismo proceso del escáner.',
+            url: 'https://github.com/christianempire/strata',
+            urlLabel: 'github.com/christianempire/strata',
+          },
+          {
             name: 'Este CV',
             tech: 'Angular 19 · SCSS · GitHub Pages',
             description: 'CV bilingüe, con temas claro/oscuro, controles por query-string y optimizado para impresión a una sola página.',
@@ -384,6 +391,13 @@ export class HomeComponent {
           },
         ]
       : [
+          {
+            name: 'Strata',
+            tech: '.NET 9 · C# · Angular 19 · SQLite · Win32 P/Invoke',
+            description: 'Windows disk-usage tool that answers what grew, when and where: incremental scans off the NTFS change journal, a diff engine over SQLite history, and an Angular UI hosted in the scanner process.',
+            url: 'https://github.com/christianempire/strata',
+            urlLabel: 'github.com/christianempire/strata',
+          },
           {
             name: 'This CV',
             tech: 'Angular 19 · SCSS · GitHub Pages',
